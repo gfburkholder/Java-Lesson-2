@@ -94,7 +94,7 @@ Define and give example.
 Today we are going to get started with Object Oriented programming. The most popular and widely used programming languages nowadays are object oriented. The backbone of Object Oriented languages are \textit{Classes} and \textit{Objects}. 
 
 \section*{Classes}
-Think of a \textit{Class} as a blueprint for building Objects. The blueprint isn't completely deterministic however (meaning that using the same Class doesn't necessarily mean the resulting objects will all be the same). Imagine a blueprint of the house, the blueprint provides the underlying structure and design of the house, but the people who live in houses made from the same blueprint can fill in and change the house with how they decorate it, what they add to it, etc. A class is like the blueprint used to build each house, and an Object is each house built from that blueprint where each one has different characteristics and capabilities. Let's dive right into the the syntax of defining classes in Java:
+Think of a \textit{Class} as a blueprint for building Objects. The blueprint isn't completely deterministic however (meaning that using the same Class doesn't necessarily mean the resulting objects will all be the same). Imagine a blueprint of a house, the blueprint provides the underlying structure and design of the house, but the people who live in houses made from the same blueprint can fill in and change the house with how they decorate it, what they add to it, how many people live inside of it etc. A class is like the blueprint used to build each house, and an Object is each house built from that blueprint where each one has different characteristics and capabilities. Let's dive right into the the syntax of defining classes in Java:
 
 \begin{lstlisting}
 class BankAccount {
@@ -111,7 +111,7 @@ class BankAccount {
 
  }
 \end{lstlisting}{}
-The code above contains a basic implementation of a Bank Account class, similar to if and loop blocks from the previous lesson, notice how the curly brackets designate what is inside the class. We declare 2 \textit{instance variable} called balance and accountHolder, but unlike how we were declaring variable in the previous lessons, we don't set this variables to any value yet because we don't know what they should be yet! This is where the idea of the blueprint comes in, by defining the class with these instance variables we are prescribing that any bank account created that follows this blueprint will have both an account holder name and a balance amount, but each bank account will be held by a different person and will have a different balance inside, so that's why we don't set these variables to anything yet, that happens inside of the constructor.
+The code above contains a basic implementation of a Bank Account class, similar to if and loop blocks from the previous lesson, notice how the curly brackets designate what is inside the class. We declare 2 \textit{instance variable} called balance and accountHolder, but unlike how we were declaring variable in the previous lessons, we don't set these variables to any value yet because we don't know what they should be yet! This is where the idea of the blueprint comes in, by defining the class with these instance variables we are prescribing that any bank account created that follows this blueprint will have both an account holder name and a balance amount, but each bank account will be held by a different person and will have a different balance inside, so that's why we don't set these variables to anything yet, that happens inside of the constructor.
 
 \subsection*{Constructors}
 
@@ -290,6 +290,102 @@ class Pet{
 }
 \end{lstlisting}{}
 
+\subsection*{Set methods}
+In the previous section, we created some methods that \textit{get} the attributes of our class, now we are going to make some that \textit{set} the attributes of the class. In particular, what if we want to change the who the bank account belongs to or if we want to withdraw or deposit money? Here is the updated class:
+\begin{lstlisting}
+class BankAccount {
+      
+    int balance;
+    String accountHolder;
+
+    public BankAccount(String accountHolder, int balance){
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+    public String getAccountHolder(){
+        return this.accountHolder;
+    }
+
+    public int getBalance(){
+        return this.balance;
+    }
+
+    public void changeAccountHolder(String name){
+        this.accountHolder = name;
+    }
+
+    public void withdraw (int amount){
+        this.balance -= amount;
+    }
+
+    public void deposit (int amount){
+        this.balance += amount;
+    }
+
+}
+BankAccount sallyAccount = new BankAccount("Sally", 9600);
+
+
+//intitializing bob's bank account to have $3400
+BankAccount bobAccount = new BankAccount("Bob", 3400);
+System.out.println(bobAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in his account");
+
+//withdrawing $1400
+bobAccount.withdraw(1400);
+System.out.println(bobAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in his account");
+
+//depositing $6000
+bobAccount.deposit(6000);
+System.out.println(bobAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in his account");
+
+System.out.println(sallyAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in her account");
+
+>>> //printed reesults:
+Bob has $3400 in his account
+Bob has $2000 in his account
+Bob has $8000 in his account
+Sally has $9600 in her account
+\end{lstlisting}{}
+
+See how we used both the withdraw and deposit methods to change Bob's balance and how the getBalance() method reflected those changes! Also notice how even though we made a few changes to Bob's account, Sally's account balance remained unchaged. Again, this is the power of using classes, even though we used the same class declaration to build the underlying structure of both Sally and Bob's accounts, they each have their own characteristics and differences that remain seperate from the other object. Did you notice the word \textit{void} in all 3 of the method declarations? This, just like with the get methods, is declaring the return type of the methods, and since we aren't trying to retrieve a value like the get methods did, we just want to change a value, these methods don't return anything! That's what \textit{void} is specifying. 
+
+\subsubsection*{\textit{Problem}}
+It's time to add some more methods to your Pet class! Add some set methods to your class that change the instance variables (like one to dye the color of the pet, or to give them the Elixir of Life to take years off of their age) and see if the get methods you made in the last section reflect those changes.
+
+\subsubsection*{\textit{Solution}}
+\begin{lstlisting}
+/*
+*
+* Rest of Class body
+*
+*/
+
+public void dyeColor(String color){
+    this.color = color;
+}
+
+public void giveElixirOfLife(int years){
+    this.age -= years;
+}
+
+public void succombToTheEndlessWheelOfTime(int years){
+    this.age += years;
+}
+
+public void teachHowToSpeak(String sound){
+    this.sound = sound;
+}
+//outside of class body
+Pet jojo = new Pet("Poodle", "jojo", 8, "white", "YIP YIP");
+Pet pete = new Pet("Parrot", "pete", 35, "purple", "KA KAW KAW");
+
+jojo.dyeColor(pink);
+pete.teachHowToSpeak("KA KAW MY NAME IS PETE");
+pete.giveElixirOfLife(20);
+
+\end{lstlisting}{}
+Here are the methods I added, the method names a little wordy but descriptive :) 
 
 
 \section*{ACTIVITY \#1} 
