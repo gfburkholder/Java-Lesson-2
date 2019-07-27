@@ -1,0 +1,355 @@
+\documentclass[14pt]{extreport}%
+\usepackage[Conny]{fncychap}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+
+
+\usepackage{titlesec}
+\titleformat{\section}
+{\color{Maroon}\normalfont\Large\bfseries}
+{\color{Maroon}\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\renewcommand{\chaptername}{Unit}
+
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% Python environment
+\lstnewenvironment{python}[1][]{\pythonstyle 
+\lstset{#1}}{}
+% Python for external files
+\newcommand\pythonexternal[2][]{{\pythonstyle
+\lstinputlisting[#1]{#2}}}
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+\titlespacing*{\chapter}{0pt}{-50pt}{40pt}
+
+\begin{document}
+
+% TITLE
+% number following chapter should be (UNIT # - 1)
+\setcounter{chapter}{0}
+\chapter{\Large{\textbf{Lesson 2}: Classes and Methods}}
+
+% formatting parameter, don't change
+\vspace{-10pt}
+
+\section*{LEARNING OBJECTIVES}
+\begin{itemize}
+    \item Defining Classes and Instantiating Objects
+    \item Using class methods 
+\end{itemize}
+
+\section*{KEY CONCEPTS}
+\subsection*{Object Oriented Principles}
+\begin{itemize}
+    \item Classes
+    \item Instance Variables
+    \item Constructors
+    \item Objects
+\end{itemize}
+\subsection*{Methods}
+\begin{itemize}
+    \item Get vs Set Methods
+    \item Public vs Static Methods
+\end{itemize}
+
+
+\section*{REVIEW}
+\subsection*{Concept}
+Define and give example.
+\subsection*{Concept}
+Define and give example.
+    
+\section*{INTRODUCTION}     
+Today we are going to get started with Object Oriented programming. The most popular and widely used programming languages nowadays are object oriented. The backbone of Object Oriented languages are \textit{Classes} and \textit{Objects}. 
+
+\section*{Classes}
+Think of a \textit{Class} as a blueprint for building Objects. The blueprint isn't completely deterministic however (meaning that using the same Class doesn't necessarily mean the resulting objects will all be the same). Imagine a blueprint of the house, the blueprint provides the underlying structure and design of the house, but the people who live in houses made from the same blueprint can fill in and change the house with how they decorate it, what they add to it, etc. A class is like the blueprint used to build each house, and an Object is each house built from that blueprint where each one has different characteristics and capabilities. Let's dive right into the the syntax of defining classes in Java:
+
+\begin{lstlisting}
+class BankAccount {
+     
+    //declaring instance variables 
+    int balance;
+    String accountHolder;
+    
+    //constructor 
+    public BankAccount(String accountHolder, int balance){
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+ }
+\end{lstlisting}{}
+The code above contains a basic implementation of a Bank Account class, similar to if and loop blocks from the previous lesson, notice how the curly brackets designate what is inside the class. We declare 2 \textit{instance variable} called balance and accountHolder, but unlike how we were declaring variable in the previous lessons, we don't set this variables to any value yet because we don't know what they should be yet! This is where the idea of the blueprint comes in, by defining the class with these instance variables we are prescribing that any bank account created that follows this blueprint will have both an account holder name and a balance amount, but each bank account will be held by a different person and will have a different balance inside, so that's why we don't set these variables to anything yet, that happens inside of the constructor.
+
+\subsection*{Constructors}
+
+\begin{lstlisting}
+class BankAccount {
+     
+    //declaring instance variables 
+    int balance;
+    String accountHolder;
+    
+    //constructor 
+    public BankAccount(String accountHolder, int balance){
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+ }
+\end{lstlisting}{}
+Let's revisit the same class declaration that we used before. Notice where the constructor is. We will get more into some of the unfamiliar terms like \textit{public} in future sections. For now, notice how it is called the same thing as the class name - BankAccount. A \textit{constructor} is what we use to build an object from the class blueprint. The constructor is called from outside of the class definition to create an object from it. The keyword \textit{this} is used to refer to the variables belonging to an instance of the class (AKA an object). Rememeber how we can have multiple objects built from the same class? Say we have one bank account that belongs to "Bob" and another that belongs to "Sally". In the case of Bob's bank account, this.accountHolder will refer to his name- "Bob", and in the case of Sally's bank account, this.accountHolder will refer to "Sally". This will become more clear once we create some objects from this class. 
+
+\subsection*{Instantiating Objects}
+Let's use our Class declaration to actually make some Bank Accounts!
+\begin{lstlisting}
+class BankAccount {
+      
+    int balance;
+    String accountHolder;
+
+    public BankAccount(String accountHolder, int balance){
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+ }
+ 
+//Where we create Objects from the Class
+//type     name of Object           values given to instance variables
+BankAccount bobAccount = new BankAccount("Bob", 3400);
+BankAccount sallyAccount = new BankAccount("Sally", 9600);
+\end{lstlisting}{}
+
+The class body is the same as before, so just focus on the two lines added at the bottom. This is where we created 2 instances of the BankAccount Class! The left side of the equal side is very similar to how we declared variables in the previous lesson. Such as declaring: int x = 8. Remember how int was the \textit{type} of the variable x, with our objects we created, the type is the name of the Class they were created from, in this case, the type of both bobAccount and sallyAccount is BankAccount. On the right side of the equal sign we declare that we want a \textit{new} instance of the BankAccount class and then following that is where we call the constructor! Look back up to the structure of the constructor and you will see that the code following the word \textit{new} matches it, only with values filled in for the parameters called \textit{accountHolder} and \textit{balance}. For the first object, bob's account, this.accountHolder is set to equal "Bob" and this.balance is set to equal 3400. The same is true with Sally's account but this.accountHolder and this.balance are set to "Sally" and 9600. \\*\\*
+
+\subsubsection{\textit{Problem}}
+It's time for you to make a class of your own! We will continue to build your class as we further develop our bank account class. 
+\begin{enumerate}
+    \item Define a class called \textbf{Pet} with as many instance variables as you want (you could have one for the species/breed of your pet, the pet's name, age, color, sound it makes etc).
+    \item Create a constructor that can be used to initialize this instance variables.
+    \item Instantiate a couple of Pet objects using the constructor
+\end{enumerate}{}
+ 
+
+\subsubsection{\textit{Solution}}
+here is an example implementation of the Pet class:
+
+\begin{lstlisting}
+class Pet{
+
+    String species;
+    String name;
+    int age;
+    String color;
+    String sound;
+
+    public Pet(String species, String name, int age, String color, String sound){
+        this.species = species;
+        this.name = name;
+        this.age = age;
+        this.color = color;
+        this.sound = sound;
+    }
+
+// a white Poodle named jojo who is 8 years old and goes YIP YIP
+Pet jojo = new Pet("Poodle", "jojo", 8, "white", "YIP YIP");
+
+// a purple parrot named pete who is 35 years old and goes KA KAW KAW
+Pet pete = new Pet("Parrot", "pete", 35, "purple", "KA KAW KAW");
+}
+\end{lstlisting}{}
+
+\section*{Methods}
+
+Now that we have two classes to work with, let's add some functionality to them! Remember how the constructor looked in the previous section? It is a special kind of \textit{Method}. Methods are blocks of code that take in \textit{parameters} execute some sort of functionality on the parameters, and then sometimes return a result. Here is an example of a very simple method (inside a hidden class body):
+
+\begin{lstlisting}
+public int sumTwoNumbers (int x, int y){
+    return (x + y);
+}
+ObjectName.sumTwoNumbers(10, 15)
+>>> 25 //returns 25
+\end{lstlisting}{}
+Once again, you can ignore the term \textit{public} for now. After that, you see it says \textit{int}, this is declaring that the method is going to return an int after it is done working. After that is the name of the method- sumTwoNumbers, and then after that is a set of parentheses containing two \textit{parameters}. Parameters are temporary variables that can be referred to only within the method body. Inside the method body, you will see a single statement that adds the parameters x and y together and then returns the result (remember that we had to declare that the method would return an int). There can be as many lines of code inside of the method body with a single return statement at the end (some methods don't need a return statement, we will get to that soon). Finally, you can see how we call a method: the name of the object followed by a period, the method name, and then the values for the parameters inside the parentheses.
+
+\subsection*{Get methods}
+now that we now the basics behind methods, let's make some for our classes that we made! We are going to add some \textit{get methods} to our BankAccount class, get methods are simply methods that only return an objects instance variable:
+
+\begin{lstlisting}
+class BankAccount {
+      
+    int balance;
+    String accountHolder;
+
+    public BankAccount(String accountHolder, int balance){
+        this.balance = balance;
+        this.accountHolder = accountHolder;
+    }
+
+    //new methods 
+    public String getAccountHolder(){
+        return this.accountHolder;
+    }
+
+    public int getBalance(){
+        return this.balance;
+    }
+
+ }
+ 
+BankAccount bobAccount = new BankAccount("Bob", 3400);
+BankAccount sallyAccount = new BankAccount("Sally", 9600);
+
+System.out.println(bobAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in his account");
+
+System.out.println(sallyAccount.getAccountHolder() + " has $" + bobAccount.getBalance() + " in her account");
+
+>>> //printed results:
+Bob has $3400 in his account
+Sally has $9600 in her account
+\end{lstlisting}{}
+
+Take a look at the two get methods we added- getAccountHolder and getBalance. Notice the return type is different for each one because getAccountHolder returns the holder's name (which is a string) and getBalance returns the amount of money they have (which is an int). And then notice how in each, we just return this.accountHolder and this.balance, since we aren't changing any variables or doing any calculations, get methods don't need any parameters! Even though the same line of code executes when we call these methods, it prints different things! Why is that! Because again, we made two objects, one for Bob and one for sally, and the instance variables like this.balance refer to their respective values that we assigned them.
+
+\subsubsection{\textit{Problem}}
+It's your turn! Write a get method for each of the instance variables that you created for your pet class! 
+
+\subsubsection{\textit{Solution}}
+here is my implementation of the get methods. I named the one for sound makeSound() because it's more fun to call jojo.makeSound() and have it print "YIP YIP"
+\begin{lstlisting}
+class Pet{
+
+    String species;
+    String name;
+    int age;
+    String color;
+    String sound;
+
+    public Pet(String species, String name, int age, String color, String sound){
+        this.species = species;
+        this.name = name;
+        this.age = age;
+        this.color = color;
+        this.sound = sound;
+    }
+
+    public String getSpecies(){
+        return this.species;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public String getColor(){
+        return this.color;
+    }
+
+    public String makeSound(){
+        return this.sound;
+    }
+
+    public int getAge(){
+        return this.age;
+    }
+
+
+}
+\end{lstlisting}{}
+
+
+
+\section*{ACTIVITY \#1} 
+\subsection*{Problem}
+Description of problem.
+\subsection*{Solution}
+Description of solution.\\
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ACTIVITY \#2} 
+\subsection*{Problem}
+Description of problem.
+
+\subsection*{Solution}
+Description of solution.\\
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ACTIVITY \#3} 
+\subsection*{Problem}
+Description of problem.
+\subsection*{Solution}
+Description of solution. \\
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ADDITIONAL PRACTICE} 
+\subsection*{Problem}
+Description of problem.
+\subsection*{Solution}
+Description of solution. \\
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{MORE ADVANCED PRACTICE} 
+\subsection*{Problem}
+Description of problem.
+\subsection*{Solution}
+Description of solution. \\
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{RESOURCES}
+\begin{itemize}
+    \item Resource 1
+    \item Resource 2
+\end{itemize}
+
+\section*{CHECK-IN}
+\begin{enumerate}
+    \item Question 1
+    \item Question 2
+\end{enumerate}
+
+\section*{HOMEWORK}
+
+\end{document}

@@ -1,0 +1,117 @@
+\documentclass[14pt]{extreport}%
+\usepackage[Conny]{fncychap}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{comment}
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2.2cm, right=2.2cm]%
+{geometry}
+
+\usepackage{titlesec}
+\titleformat{\section}
+{\color{Maroon}\normalfont\Large\bfseries}
+{\color{Maroon}\thesection}{1em}{}[{\titlerule[0.8pt]}]
+
+\renewcommand{\chaptername}{Unit}
+
+\DeclareFixedFont{\ttb}{T1}{txtt}{bx}{n}{12} % for bold
+\DeclareFixedFont{\ttm}{T1}{txtt}{m}{n}{12}  % for normal
+
+% Custom colors
+\definecolor{deepblue}{rgb}{0,0,0.5}
+\definecolor{deepred}{rgb}{0.6,0,0}
+\definecolor{deepgreen}{rgb}{0,0.5,0}
+\usepackage{listings}
+% Python style for highlighting
+\newcommand\pythonstyle{\lstset{
+language=Python,
+basicstyle=\ttm,
+otherkeywords={self},             % Add keywords here
+keywordstyle=\ttb\color{deepblue},
+emph={MyClass,__init__},          % Custom highlighting
+emphstyle=\ttb\color{deepred},    % Custom highlighting style
+stringstyle=\color{deepgreen},
+frame=tb,                         % Any extra options here
+showstringspaces=false            % 
+}}
+% Python environment
+\lstnewenvironment{python}[1][]{\pythonstyle 
+\lstset{#1}}{}
+% Python for external files
+\newcommand\pythonexternal[2][]{{\pythonstyle
+\lstinputlisting[#1]{#2}}}
+% Python for inline
+\newcommand\pythoninline[1]{{\pythonstyle\lstinline!#1!}}
+
+
+\titlespacing*{\chapter}{0pt}{-50pt}{40pt}
+
+\begin{document}
+
+
+% TITLE
+% number following chapter should be (UNIT # - 1)
+\setcounter{chapter}{0}
+\chapter{\Large{\textbf{Lesson 1}: Insert Name Here}}
+
+% formatting parameter, don't change
+\vspace{-10pt}
+
+\section*{KEY CONCEPTS}
+\subsection*{Concept}
+Summary
+\subsection*{Concept}
+Summary
+\subsection*{Concept}
+Summary
+
+\section*{NEW SYNTAX}
+\begin{itemize}
+    \item new syntax 1
+    \item new syntax 2
+\end{itemize}
+
+\section*{ACTIVITY \#1} 
+\subsection*{Problem}
+\subsection*{Solution}
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ACTIVITY \#2} 
+\subsection*{Problem}
+\subsection*{Solution}
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ACTIVITY \#3} 
+\subsection*{Problem}
+\subsection*{Solution}
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{ADDITIONAL PRACTICE} 
+\subsection*{Problem}
+\subsection*{Solution}
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{MORE ADVANCED PRACTICE} 
+\subsection*{Problem}
+\subsection*{Solution}
+\begin{python}
+#put python code here
+\end{python}
+
+\section*{RESOURCES}
+\begin{itemize}
+    \item Resource 1
+    \item Resource 2
+\end{itemize}
+
+\section*{HOMEWORK}
+
+\end{document}
